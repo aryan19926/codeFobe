@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Button, ActivityIndicator } from 'react-native';
-
-
-import UserCard from '../../components/UserCard'
+import { View, StyleSheet, Button, ActivityIndicator, Text } from 'react-native';
+import UserCard from '../../components/UserCard';
 
 const App = () => {
   const [users, setUsers] = useState<any[]>([]);
@@ -40,19 +38,18 @@ const App = () => {
   };
 
   return (
-   
-      <View style={styles.container}>
-        {loading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
-        ) : (
-          <UserCard user={users[currentIndex]} />
-        )}
-        <View style={styles.buttonContainer}>
-          <Button title="Previous" onPress={handlePrevious} disabled={currentIndex === 0} />
-          <Button title="Next" onPress={handleNext} disabled={currentIndex === users.length - 1} />
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.header}>User Profiles</Text>
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <UserCard user={users[currentIndex]} />
+      )}
+      <View style={styles.buttonContainer}>
+        <Button title="Previous" onPress={handlePrevious} disabled={currentIndex === 0} />
+        <Button title="Next" onPress={handleNext} disabled={currentIndex === users.length - 1} />
       </View>
-    
+    </View>
   );
 };
 
@@ -62,6 +59,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f8f8f8',
+    padding: 20,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
   buttonContainer: {
     flexDirection: 'row',
